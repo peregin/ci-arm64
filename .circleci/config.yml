@@ -21,7 +21,6 @@ commands:
             docker buildx create --name arm-builder
             docker buildx use arm-builder
             docker buildx inspect --bootstrap
-            docker buildx build --platform linux/amd64,linux/arm64 -t arm-image .
 jobs:
   build:
     machine:
@@ -31,7 +30,6 @@ jobs:
       - run:
           name: Build ARM docker
           command: |
-            DOCKER_CLI_EXPERIMENTAL=enabled
             docker buildx use arm-builder
             docker buildx build --platform linux/amd64,linux/arm64 -t arm-image .
 workflows:
