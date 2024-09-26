@@ -4,30 +4,31 @@ commands:
     steps:
       - checkout
       - run:
-          name: Setup buildx and qemu
+          name: Setup qemu and binfmt-support
           command: |
-            sudo  apt-key adv --recv-keys --keyserver keyserver.ubuntu.com E88979FB9B30ACF2
+            sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com E88979FB9B30ACF2
             sudo apt-get update
-            sudo apt-get install -y qemu-user-static
-            sudo apt-get install -y binfmt-support
+            sudo apt-get install -y qemu-user-static binfmt-support
+      - run:
+          name: Setup buildx
+          command: |
+            docker run --privileged --rm tonistiigi/binfmt --install all
+            docker buildx create --name arm-builder
+            docker buildx use arm-builder
+            docker buildx inspect --bootstrap
       - run:
           name: Check versions
           command: |
             qemu-aarch64-static --version
-            update-binfmts --version
-      - run:
-          name: Build ARM image
-          command: |
-            docker buildx create --name arm-builder
-            docker buildx use arm-builder
-            docker buildx inspect --bootstrap
+            update-binfmts --display
 jobs:
   build:
     docker:
-      - image: peregin/circleci:latest
-        user: circleci
+      - image: docker:20.10.7  # Use an official Docker image with buildx support
+        user: root
     environment:
       JVM_OPTS: -Xmx3072m
+      DOCKER_BUILDKIT: 1  # Enable BuildKit
     steps:
       - setup_remote_docker:
           docker_layer_caching: false
