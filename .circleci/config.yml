@@ -31,7 +31,7 @@ jobs:
           name: Build ARM docker
           command: |
             DOCKER_CLI_EXPERIMENTAL=enabled 
-            docker buildx build --platform linux/arm64 --load -t arm-image .
+            docker buildx build --platform linux/amd64,linux/arm64 -t arm-image .
 workflows:
   version: 2
   build:
