@@ -4,10 +4,6 @@ commands:
     steps:
       - checkout
       - run:
-          name: Setup qemu and binfmt-support
-          command: |
-            apt-get install -y qemu-user-static binfmt-support
-      - run:
           name: Setup buildx
           command: |
             docker run --privileged --rm tonistiigi/binfmt --install all
