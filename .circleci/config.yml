@@ -15,7 +15,7 @@ commands:
             qemu-aarch64-static --version
             update-binfmts --version
       - run:
-          name: Create builder
+          name: Build ARM image
           command: |
             export DOCKER_CLI_EXPERIMENTAL=enabled
             docker buildx create --name arm-builder
@@ -25,13 +25,14 @@ commands:
 jobs:
   build:
     machine:
-      image: 'ubuntu-2004:202010-01'
+      image: 'ubuntu-2204:2024.05.1'
     steps:
       - setup
       - run:
           name: Build ARM docker
           command: |
-            DOCKER_CLI_EXPERIMENTAL=enabled 
+            DOCKER_CLI_EXPERIMENTAL=enabled
+            docker buildx use arm-builder
             docker buildx build --platform linux/amd64,linux/arm64 -t arm-image .
 workflows:
   version: 2
