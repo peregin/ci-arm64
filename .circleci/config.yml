@@ -20,6 +20,7 @@ jobs:
     docker:
       - image: docker:20.10.7  # Use an official Docker image with buildx support
         user: root
+    resource_class: arm.large
     environment:
       JVM_OPTS: -Xmx3072m
       DOCKER_BUILDKIT: 1  # Enable BuildKit
