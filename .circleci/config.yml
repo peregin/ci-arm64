@@ -21,7 +21,7 @@ jobs:
     docker:
       - image: peregin/circleci:latest
         user: root
-    resource_class: arm.small
+    resource_class: small
     environment:
       JVM_OPTS: -Xmx3072m
       DOCKER_BUILDKIT: 1  # Enable BuildKit
