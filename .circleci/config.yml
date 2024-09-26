@@ -29,6 +29,9 @@ jobs:
     environment:
       JVM_OPTS: -Xmx3072m
     steps:
+      - setup_remote_docker:
+          docker_layer_caching: false
+          privileged: true
       - setup
       - run:
           name: Build ARM docker
