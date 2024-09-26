@@ -17,6 +17,7 @@ jobs:
       - run:
           name: Enable Docker buildx
           command: export DOCKER_CLI_EXPERIMENTAL=enabled
+      - checkout
       - run:
           name: Build ARM docker
           command: |
