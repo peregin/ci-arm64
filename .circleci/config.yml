@@ -17,7 +17,6 @@ commands:
       - run:
           name: Build ARM image
           command: |
-            export DOCKER_CLI_EXPERIMENTAL=enabled
             docker buildx create --name arm-builder
             docker buildx use arm-builder
             docker buildx inspect --bootstrap
