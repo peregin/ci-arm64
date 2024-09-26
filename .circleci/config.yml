@@ -4,9 +4,6 @@ jobs:
     docker:
       - image: peregin/circleci:latest
     resource_class: small
-    environment:
-      JVM_OPTS: -Xmx3072m
-      DOCKER_BUILDKIT: 1  # Enable BuildKit
     steps:
       - setup_remote_docker:
           docker_layer_caching: false
