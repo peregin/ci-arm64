@@ -28,7 +28,7 @@ jobs:
             docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
             docker context create arm-builder
             docker buildx create arm-builder --use
-            docker buildx build --platform linux/amd64,linux/arm64 -t arm-image .
+            docker buildx build --platform linux/amd64,linux/arm64 --load -t arm-image .
 workflows:
   version: 2
   build:
