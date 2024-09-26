@@ -2,8 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: peregin/circleci:latest
-        user: root
+      - image: cimg/base:stable
     resource_class: small
     environment:
       JVM_OPTS: -Xmx3072m
