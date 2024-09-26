@@ -6,8 +6,6 @@ commands:
       - run:
           name: Setup qemu and binfmt-support
           command: |
-            apt-key adv --recv-keys --keyserver keyserver.ubuntu.com E88979FB9B30ACF2
-            apt-get update
             apt-get install -y qemu-user-static binfmt-support
       - run:
           name: Setup buildx
