@@ -27,9 +27,11 @@ jobs:
       DOCKER_BUILDKIT: 1  # Enable BuildKit
     steps:
       - setup_remote_docker:
+          version: 20.10.6
           docker_layer_caching: false
-          privileged: true
-      - setup
+      - run:
+          name: Enable Docker buildx
+          command: export DOCKER_CLI_EXPERIMENTAL=enabled
       - run:
           name: Build ARM docker
           command: |
