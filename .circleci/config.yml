@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: peregin/circleci:latest
+        user: circleci
     resource_class: small
     steps:
       - setup_remote_docker:
@@ -14,9 +15,6 @@ jobs:
             url="https://github.com/docker/buildx/releases/download/v0.17.1/buildx-v0.17.1.linux-amd64"
             curl -sSL -o ~/.docker/cli-plugins/docker-buildx $url
             chmod a+x ~/.docker/cli-plugins/docker-buildx
-      - run:
-          name: Enable Docker buildx
-          command: export DOCKER_CLI_EXPERIMENTAL=enabled
       - checkout
       - run:
           name: dockerhub login
