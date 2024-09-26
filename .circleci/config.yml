@@ -12,6 +12,16 @@ jobs:
           version: 20.10.6
           docker_layer_caching: false
       - run:
+          name: Install Docker buildx
+          command: |
+            mkdir -p ~/.docker/cli-plugins
+            url="https://github.com/docker/buildx/releases/download/v0.8.0/buildx-v0.8.0.linux-amd64"
+            curl -sSL -o ~/.docker/cli-plugins/docker-buildx $url
+            chmod a+x ~/.docker/cli-plugins/docker-buildx
+      - run:
+          name: Enable Docker buildx
+          command: export DOCKER_CLI_EXPERIMENTAL=enabled
+      - run:
           name: Build ARM docker
           command: |
             docker buildx install
