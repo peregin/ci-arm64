@@ -5,6 +5,8 @@ jobs:
       - image: peregin/circleci:latest
         user: circleci
     resource_class: small
+    environment:
+      BUILDX_VERSION: 0.17.1
     steps:
       - setup_remote_docker:
           docker_layer_caching: false
@@ -12,7 +14,7 @@ jobs:
           name: Install Docker buildx
           command: |
             mkdir -p ~/.docker/cli-plugins
-            url="https://github.com/docker/buildx/releases/download/v0.17.1/buildx-v0.17.1.linux-amd64"
+            url="https://github.com/docker/buildx/releases/download/v$BUILDX_VERSION/buildx-v$BUILDX_VERSION.linux-amd64"
             curl -sSL -o ~/.docker/cli-plugins/docker-buildx $url
             chmod a+x ~/.docker/cli-plugins/docker-buildx
       - checkout
